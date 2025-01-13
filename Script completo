@@ -4,7 +4,7 @@ mkdir -p analysis
 cd analysis
 
 ## instead of copying - we create symbolic links to the original reads
-mkdir reads
+mkdir -p reads
 cd reads
 ln -s /workspaces/class-rnaseq/datasets-class-rnaseq/raw_data/* .
 
@@ -233,5 +233,8 @@ disgnet = enricher(entrez_genes_sig, TERM2GENE=disease2gene, TERM2NAME=disease2n
 
 cnetplot(disgnet, foldChange=resdata$log2FoldChange[which(resdata$padj<0.5)])
 
+pdf("cnetplot_disgnet.pdf")
+cnetplot(disgnet, foldChange = resdata$log2FoldChange[which(resdata$padj<0.5)])
+dev.off()
 
 save.image("deseq2_analysis.RData")
